@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c49a0c74da05ef85ac286a86f64e35c8f57726a868fa50a53646d06981b26e1a"
+            "sha256": "410ac08c5940a652f6c50b70df6d0e238a118a5b6365ebdace7fab0e579dc706"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,11 +33,21 @@
             "markers": "python_version >= '3.8'",
             "version": "==4.2.6"
         },
+        "django-environ": {
+            "hashes": [
+                "sha256:0ff95ab4344bfeff693836aa978e6840abef2e2f1145adff7735892711590c05",
+                "sha256:f32a87aa0899894c27d4e1776fa6b477e8164ed7f6b3e410a62a6d72caaf64be"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.6' and python_version < '4'",
+            "version": "==0.11.2"
+        },
         "dnspython": {
             "hashes": [
                 "sha256:57c6fbaaeaaf39c891292012060beb141791735dbb4004798328fc2c467402d8",
                 "sha256:8dcfae8c7460a2f84b4072e26f1c9f4101ca20c071649cb7c34e8b6a93d58984"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.8' and python_version < '4.0'",
             "version": "==2.4.2"
         },
@@ -59,6 +69,11 @@
             "version": "==23.2"
         },
         "pymongo": {
+            "extras": [
+                "gssapi",
+                "srv",
+                "tls"
+            ],
             "hashes": [
                 "sha256:076afa0a4a96ca9f77fec0e4a0d241200b3b3a1766f8d7be9a905ecf59a7416b",
                 "sha256:08819da7864f9b8d4a95729b2bea5fffed08b63d3b9c15b4fea47de655766cf5",

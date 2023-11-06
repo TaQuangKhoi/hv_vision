@@ -26,6 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'haovan-19dab2764353.herokuapp.com',
+    '127.0.0.1',
 ]
 
 # Application definition

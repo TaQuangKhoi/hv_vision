@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 gunicorn = "*"
 pymongo = "*"
+dnspython = "*"
+django-environ = "*"
 
 [dev-packages]
 
