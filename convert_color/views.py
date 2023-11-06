@@ -8,4 +8,10 @@ def index(request):
 
 # use render() instead of HttpResponse()
 def index_convert_color(request):
-    return render(request, template_name='index.html')
+    return render(
+        request,
+        template_name='index.html',
+        context={
+            'image': 'https://i.pinimg.com/736x/20/c9/9c/20c99c680ffe0b40127af797a535a225.jpg',
+        }
+    )
