@@ -9,6 +9,7 @@ gunicorn = "*"
 pymongo = "*"
 dnspython = "*"
 django-environ = "*"
+pillow = "*"
 
 [dev-packages]
 
