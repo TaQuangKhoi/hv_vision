@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # URL for Hảo Văn Apps
-    path('convert_color/', include('convert_color.urls')),
+    path('', include('convert_color.urls')),
 ]
