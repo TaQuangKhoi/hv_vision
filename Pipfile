@@ -10,6 +10,7 @@ pymongo = "*"
 dnspython = "*"
 django-environ = "*"
 pillow = "*"
+ultralytics = "*"
 
 [dev-packages]
 
