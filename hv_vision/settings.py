@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Apps for Hảo Văn
+    'ui',
     'convert_color',
+    'text_recognition',
 ]
 
 MIDDLEWARE = [
