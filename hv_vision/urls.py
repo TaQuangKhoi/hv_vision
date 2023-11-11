@@ -22,4 +22,5 @@ urlpatterns = [
 
     # URL for Hảo Văn Apps
     path('', include('convert_color.urls')),
+    path("text_recognition/", include('text_recognition.urls')),
 ]

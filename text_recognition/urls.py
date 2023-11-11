@@ -3,5 +3,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index_convert_color, name="index_convert_color"),
+    path("", views.index, name="index_hv_text_recognition")
 ]
