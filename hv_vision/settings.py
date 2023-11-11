@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print("BASE_DIR: ", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -117,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'convert_color/static'),
+    os.path.join(BASE_DIR, 'convert_color\static'),
 ]
 
 # Default primary key field type
@@ -125,5 +126,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Extra Config for Hảo
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#== Extra Config for Hảo Văn ==#
+# for heroku run collectstatic
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = BASE_DIR / "staticfiles"

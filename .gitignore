@@ -139,3 +139,4 @@ GitHub.sublime-settings
 # Hảo Văn Ignore #
 static/
 hv_vision/.env
+/staticfiles/
