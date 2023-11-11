@@ -1,0 +1,23 @@
+:root {
+    --image-box-height: 100vh;
+    --image-box-width: 100vw;
+}
+
+.center-middle-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+#image-box {
+    border: #0a53be 2px solid;
+    /* border round*/
+    border-radius: 10px;
+
+    margin: auto;
+
+    height: 500px;
+    width: 500px;
+}
