@@ -137,6 +137,5 @@ GitHub.sublime-settings
 .history
 
 # Hảo Văn Ignore #
-static/
 hv_vision/.env
 /staticfiles/
