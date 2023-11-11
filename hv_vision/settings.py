@@ -126,7 +126,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#== Extra Config for Hảo Văn ==#
+# == Extra Config for Hảo Văn ==
 # for heroku run collectstatic
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "static"
