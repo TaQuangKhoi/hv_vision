@@ -4,9 +4,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>HV Text Recognition</title>
     <link rel="stylesheet" href="{% static 'tr/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap-5.3.2/css/bootstrap.css' %}">
+    {% block additional_css %}
+    {% endblock %}
+    {% block additional_js %}
+    {% endblock %}
 </head>
 <body>
 {% block content %}

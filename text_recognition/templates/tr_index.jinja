@@ -1,10 +1,25 @@
 {% extends 'tr_base.jinja' %}
+{% load static %}
+
+{% block additional_js %}
+    <script src="{% static 'tr/js/script.js' %}"></script>
+{% endblock %}
 
 {% block content %}
     <div class="center-middle-screen">
-        <div id="image-box">
-            <input type="file" class="form-control" id="customFile"/>
+        <div id="image-box" onclick="clickImageBox()">
+            <img src="{{ image }}" id="image-in-box" alt="Ảnh Hảo">
         </div>
     </div>
-
+    <form id="form-upload">
+        <label for="image-upload" id="image-upload-label">
+            <input hidden="hidden"
+                   type="file"
+                   name="image-upload"
+                   id="image-upload"
+                   accept="image/png, image/jpeg, image/jpg"
+            />
+        </label>
+        <input type="submit" value="Upload" id="submit-upload"/>
+    </form>
 {% endblock %}
