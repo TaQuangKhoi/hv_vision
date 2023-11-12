@@ -11,7 +11,8 @@
             <img src="{{ image }}" id="image-preview" alt="Ảnh Hảo">
         </div>
     </div>
-    <form id="form-upload">
+    <form id="form-upload" method="post">
+        {% csrf_token %}
         <label for="image-upload" id="image-upload-label">
             <input hidden="hidden"
                    type="file"
@@ -20,6 +21,7 @@
                    accept="image/png, image/jpeg, image/jpg"
             />
         </label>
+        <input type="text" value="Hảo Văn" name="name" id="name"/>
         <input type="submit" value="Upload" id="submit-upload"/>
     </form>
 {% endblock %}

@@ -11,6 +11,7 @@ dnspython = "*"
 django-environ = "*"
 pillow = "*"
 whitenoise = "*"
+opencv-python = "*"
 
 [dev-packages]
 
