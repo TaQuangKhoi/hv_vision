@@ -27,11 +27,11 @@
     display: none;
 }
 
-#image-in-box {
-    background-color: #0a53be;
-    height: inherit;
-    width: inherit;
-    object-fit: fill;
+#image-preview {
+    /*background-color: #0a53be;*/
+    height: 499px;
+    width: 499px;
+    object-fit: contain;
 }
 
 #submit-upload {
