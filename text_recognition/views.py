@@ -14,15 +14,20 @@ def index(request):
             # print(len(request.FILES))
             image = request.FILES.get("imageInput")
 
+            file_name = "media/test.png"
+            # Save the image
+            with open(file_name, 'wb+') as destination:
+                for chunk in image.chunks():
+                    destination.write(chunk)
+
             # Open the image in OpenCV
-            img = cv2.imread(image)
+            img = cv2.imread(file_name)
 
             # Apply Canny
             edges = cv2.Canny(img, 100, 200, 3, L2gradient=True)
 
-            with open(f"media/test.png", 'wb+') as destination:
-                for chunk in edges.chunks():
-                    destination.write(chunk)
+            cv2.imwrite("media/test_canny.png", edges)
+
             # for file in request.FILES.getlist('imageInput'):
             #     print(file)
             #     print(type(file))
