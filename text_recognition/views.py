@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import ImageForm
+import cv2
 
 
 def index(request):
@@ -12,9 +13,15 @@ def index(request):
             # length of request.FILES
             # print(len(request.FILES))
             image = request.FILES.get("imageInput")
-            # save image to media folder
+
+            # Open the image in OpenCV
+            img = cv2.imread(image)
+
+            # Apply Canny
+            edges = cv2.Canny(img, 100, 200, 3, L2gradient=True)
+
             with open(f"media/test.png", 'wb+') as destination:
-                for chunk in image.chunks():
+                for chunk in edges.chunks():
                     destination.write(chunk)
             # for file in request.FILES.getlist('imageInput'):
             #     print(file)

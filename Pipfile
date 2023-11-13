@@ -12,6 +12,7 @@ django-environ = "*"
 pillow = "*"
 whitenoise = "*"
 opencv-python = "*"
+matplotlib = "*"
 
 [dev-packages]
 
