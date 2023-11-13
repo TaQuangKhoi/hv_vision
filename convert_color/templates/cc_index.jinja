@@ -11,8 +11,11 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{ image }}" class="card-img-top" alt="Ảnh Hảo">
                     <div class="card-body">
-                        <form method="post" action="">
-                            <a href="" class="btn btn-primary">Gray</a>
+                        <form method="post">
+                            {% csrf_token %}
+                            <label>
+                                <input href="" class="btn btn-primary" type="submit"/>
+                            </label>
                         </form>
                     </div>
                 </div>
