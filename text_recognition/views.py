@@ -1,27 +1,43 @@
+from django.http import HttpResponse
 from django.shortcuts import render
-import cv2
+from .forms import ImageForm
+
 
 def index(request):
     """Index page view"""
 
     if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            # length of request.FILES
+            # print(len(request.FILES))
+            image = request.FILES.get("imageInput")
+            # save image to media folder
+            with open(f"media/test.png", 'wb+') as destination:
+                for chunk in image.chunks():
+                    destination.write(chunk)
+            # for file in request.FILES.getlist('imageInput'):
+            #     print(file)
+            #     print(type(file))
+        else:
+            # print form errors
+            print(form.errors)
+            return HttpResponse("Invalid form")
+
         # get values from form
         data = request.POST
         name = data.get("name")
-        print(name)
 
         files = request.FILES
         image_upload = files.get("image-upload")
-        print(type(image_upload))
-        # save image to media folder
-        # with open(f"media/test.png", 'wb+') as destination:
-        #     for chunk in image_upload.chunks():
-        #         destination.write(chunk)
-
-    return render(
-        request,
-        template_name='tr_index.jinja',
-        context={
-            'image': 'https://i.pinimg.com/736x/20/c9/9c/20c99c680ffe0b40127af797a535a225.jpg',
-        }
-    )
+        return HttpResponse("OK")
+    else:
+        form = ImageForm()
+        return render(
+            request,
+            template_name='tr_index.jinja',
+            context={
+                'image': 'https://i.pinimg.com/736x/20/c9/9c/20c99c680ffe0b40127af797a535a225.jpg',
+                'form': form,
+            }
+        )
