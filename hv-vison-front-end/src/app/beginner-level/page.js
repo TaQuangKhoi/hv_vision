@@ -1,5 +1,7 @@
 export default function BeginnerPage() {
     return (
-        <div></div>
+        <div>
+            Khôi nhớ Hảo
+        </div>
     )
 }
