@@ -17,3 +17,5 @@ def save_canny_image(img):
     edges = cv2.Canny(img, 100, 200, 3, L2gradient=True)
 
     cv2.imwrite(file_dir + "test_canny.png", edges)
+
+    return ["/static/results/" + "test.png", "/static/results/" + "test_canny.png"]

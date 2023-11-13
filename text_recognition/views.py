@@ -13,8 +13,16 @@ def index(request):
             # length of request.FILES
             # print(len(request.FILES))
             image = request.FILES.get("imageInput")
-            save_canny_image(image)
-            return HttpResponse("Valid form")
+            [image_upload, image_preview] = save_canny_image(image)
+            return render(
+                request,
+                template_name='tr_index.jinja',
+                context={
+                    'imageUpload': image_upload,
+                    'imagePreview': image_preview,
+                    'form': form,
+                }
+            )
         else:
             # print form errors
             print(form.errors)
