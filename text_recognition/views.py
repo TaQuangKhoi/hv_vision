@@ -26,7 +26,8 @@ def index(request):
             template_name='tr_index.jinja',
             context={
                 # 'image': 'https://i.pinimg.com/736x/20/c9/9c/20c99c680ffe0b40127af797a535a225.jpg', # Hình Hảo
-                'image': 'https://cdn-icons-png.flaticon.com/512/2659/2659360.png',
+                'imageUpload': 'https://cdn-icons-png.flaticon.com/512/2659/2659360.png',
+                'imagePreview': 'https://cdn-icons-png.flaticon.com/512/2659/2659360.png',
                 'form': form,
             }
         )

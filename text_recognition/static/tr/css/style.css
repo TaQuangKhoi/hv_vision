@@ -18,7 +18,8 @@
 
 }
 
-.image-box:hover {
+ /* image-box select the second*/
+.image-box:nth-of-type(1):hover {
     cursor: pointer;
 }
 
@@ -27,7 +28,7 @@
     display: none;
 }
 
-#image-preview {
+#image-upload, #image-preview {
     /*background-color: #0a53be;*/
     height: 498px;
     width: 498px;
