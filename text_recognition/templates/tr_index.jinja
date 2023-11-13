@@ -7,22 +7,24 @@
 
 {% block content %}
     <div class="center-middle-screen">
-        <div id="image-box" onclick="clickImageBox()">
+        <div class="image-box" onclick="clickImageBox()">
+            <img src="{{ image }}" id="image-preview" alt="Ảnh Hảo">
+        </div>
+        <form id="form-upload" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input hidden="hidden"
+                   type="file"
+                   name="imageInput"
+                   id="imageInput"
+                   accept="image/png, image/jpeg, image/jpg"
+            />
+            {#            {{ form.imageInput.as_hidden }}#}
+            {#        <input type="text" value="Hảo Văn" name="name" id="name"/>#}
+            <input class="btn btn-primary" type="submit" value="Canny" id="submit-upload"/>
+        </form>
+        <div class="image-box" onclick="clickImageBox()">
             <img src="{{ image }}" id="image-preview" alt="Ảnh Hảo">
         </div>
     </div>
-    <form id="form-upload" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-{#        <label for="image-upload" id="image-upload-label">#}
-{#            <input hidden="hidden"#}
-{#                   type="file"#}
-{#                   name="image-upload"#}
-{#                   id="image-upload"#}
-{#                   accept="image/png, image/jpeg, image/jpg"#}
-{#            />#}
-{#        </label>#}
-        {{ form }}
-{#        <input type="text" value="Hảo Văn" name="name" id="name"/>#}
-        <input type="submit" value="Upload" id="submit-upload"/>
-    </form>
+
 {% endblock %}

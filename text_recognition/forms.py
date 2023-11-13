@@ -8,5 +8,5 @@ class ImageForm(forms.Form):
             attrs={
                 'id': 'imageInput'
             }
-        )
+        ),
     )

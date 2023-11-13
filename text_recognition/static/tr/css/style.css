@@ -6,7 +6,7 @@
     min-height: 100vh;
 }
 
-#image-box {
+.image-box {
     border: #0a53be 2px solid;
     /* border round*/
     border-radius: 10px;
@@ -18,19 +18,19 @@
 
 }
 
-#image-box:hover {
+.image-box:hover {
     cursor: pointer;
 }
 
 
-#image-box::file-selector-button {
+.image-box::file-selector-button {
     display: none;
 }
 
 #image-preview {
     /*background-color: #0a53be;*/
-    height: 499px;
-    width: 499px;
+    height: 498px;
+    width: 498px;
     object-fit: contain;
 }
 
