@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'global_app',
     'convert_color',
     'text_recognition',
+    'canny',
 ]
 
 MIDDLEWARE = [
