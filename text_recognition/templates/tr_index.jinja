@@ -2,29 +2,41 @@
 {% load static %}
 
 {% block additional_js %}
-    <script src="{% static 'tr/js/script.js' %}"></script>
+    <script src="{% static 'tr/js/script.js' %}" defer></script>
 {% endblock %}
 
+
+
 {% block content %}
+    {{ imageUpload|json_script:"imageUploadValue" }}
     <div class="center-middle-screen">
         <div class="image-box" onclick="clickImageBox()">
             <img src="{{ imageUpload }}" id="image-upload" alt="Ảnh Hảo">
         </div>
-        <form id="form-upload" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input hidden="hidden"
-                   type="file"
-                   name="imageInput"
-                   id="imageInput"
-                   accept="image/png, image/jpeg, image/jpg"
-            />
-            {#            {{ form.imageInput.as_hidden }}#}
-            {#        <input type="text" value="Hảo Văn" name="name" id="name"/>#}
-            <input class="btn btn-primary" type="submit" value="Canny" id="submit-upload"/>
-        </form>
+        <ul>
+            <li>
+                <button class="btn btn-primary" type="submit" id="canny-submit-button">
+                    Canny
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-primary" type="submit" id="contours-submit-button">
+                    Contours
+                </button>
+            </li>
+        </ul>
         <div class="image-box">
             <img src="{{ imagePreview }}" id="image-preview" alt="Ảnh Hảo">
         </div>
     </div>
-
+    <form action="" method="post" enctype="multipart/form-data" id="form-file">
+        {% csrf_token %}
+        <input hidden="hidden"
+               type="file"
+               name="imageInput"
+               id="imageInput"
+               accept="image/png, image/jpeg, image/jpg"
+               value="{{ imageUpload }}"
+        />
+    </form>
 {% endblock %}

@@ -3,31 +3,49 @@ import numpy as np
 import base64
 
 
-def save_canny_image(img):
-    file_dir = "text_recognition/static/results/"
-
-    # file_name = file_dir + "test.png"
-    # # Save the image
-    # with open(file_name, 'wb+') as destination:
-    #     for chunk in img.chunks():
-    #         destination.write(chunk)
-
+def get_canny_image(img):
     # Open the image in OpenCV
     img_cv2 = cv2.imdecode(
         np.fromstring(img.read(), np.uint8),
         cv2.IMREAD_UNCHANGED
     )
-    origin_content = cv2.imencode('.jpg', img_cv2)[1].tostring()
-    encoded_origin = base64.encodebytes(origin_content)
-    origin = 'data:image/jpg;base64, ' + str(encoded_origin, 'utf-8')
+
+    origin = get_base64_image(img_cv2)
 
     # Apply Canny
     edges = cv2.Canny(img_cv2, 100, 200, 3, L2gradient=True)
-    image_result_content = cv2.imencode('.jpg', edges)[1].tostring()
-    encoded_result = base64.encodebytes(image_result_content)
 
-    result = 'data:image/jpg;base64, ' + str(encoded_result, 'utf-8')
-
-    # cv2.imwrite(file_dir + "test_canny.png", edges)
+    result = get_base64_image(edges)
 
     return [origin, result]
+
+
+def get_contours_image(img):
+    img_cv2 = cv2.imdecode(
+        np.fromstring(img.read(), np.uint8),
+        cv2.IMREAD_UNCHANGED
+    )
+    origin = get_base64_image(img_cv2)
+
+    # Grayscale
+    gray = cv2.cvtColor(img_cv2, cv2.COLOR_BGR2GRAY)
+
+    # Find Canny edges
+    edged = cv2.Canny(gray, 30, 200)
+
+    # Finding Contours
+    # Use a copy of the image e.g. edged.copy()
+    # since findContours alters the image
+    contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+    cv2.drawContours(img_cv2, contours, -1, (0, 255, 0), 3)
+
+    result = get_base64_image(img_cv2)
+
+    return [origin, result]
+
+
+def get_base64_image(img):
+    content = cv2.imencode('.jpg', img)[1].tostring()
+    encoded = base64.encodebytes(content)
+    return 'data:image/jpg;base64, ' + str(encoded, 'utf-8')
