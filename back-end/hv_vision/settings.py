@@ -14,7 +14,6 @@ import environ
 import os
 from pathlib import Path
 
-
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -56,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
 
     # Apps for Hảo Văn
     'global_app',
@@ -179,4 +180,9 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': '2',
 }
