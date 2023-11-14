@@ -1,6 +1,7 @@
 'use client';
 
 import {useState} from "react";
+import Image from "next/image";
 
 export default function CameraPage() {
     const [videoSrc, setVideoSrc] = useState(null);
@@ -114,6 +115,12 @@ export default function CameraPage() {
                 type="button" id="canny-submit-button">
             Canny
         </button>
-        <img src="https://haovan-19dab2764353.herokuapp.com/camera/video/"/>
+        <div
+            className="w-[960px] h-[540px] m-auto rounded-[10px] border-[#0a53be] border-2">
+            <img className="w-[960px] h-[540px] !object-contain rounded-[10px]"
+                 src="https://haovan-19dab2764353.herokuapp.com/camera/video/"
+            />
+        </div>
+
     </>
 }
