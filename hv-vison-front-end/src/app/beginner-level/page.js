@@ -23,19 +23,15 @@ export default function BeginnerPage() {
         let data = new FormData();
         data.append('file', input.files[0]);
 
-        await fetch('http://127.0.0.1:8000/canny/create/', {
+        let endpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
+        await fetch(endpoint + '/canny/create/', {
             method: 'POST',
-            headers: {
-                // 'Accept': 'application/json',
-                // 'Content-Type': '*/*',
-            },
             body: data
         }).then(response => {
             return response.json()
         }).then(data => {
             let json = JSON.parse(data)
-            console.debug(json)
-            setImageUploadSrc(json.imageUpload)
+            // setImageUploadSrc(json.imageUpload)
             setImagePreviewSrc(json.imagePreview)
         }).catch(error => {
             console.error(error)
