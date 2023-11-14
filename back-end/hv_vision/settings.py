@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'convert_color',
     'text_recognition',
     'canny',
+    'camera',
 ]
 
 MIDDLEWARE = [

@@ -27,4 +27,6 @@ urlpatterns = [
     path('canny/', include('canny.urls')),
 
     path('contours/', include('contours.urls')),
+
+    path('camera/', include('camera.urls')),
 ]
