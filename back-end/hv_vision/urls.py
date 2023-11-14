@@ -25,4 +25,6 @@ urlpatterns = [
     path('text_recognition/', include('text_recognition.urls')),
 
     path('canny/', include('canny.urls')),
+
+    path('contours/', include('contours.urls')),
 ]
