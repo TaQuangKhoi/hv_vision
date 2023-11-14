@@ -17,6 +17,7 @@ psycopg2 = "*"
 dj-database-url = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+pytesseract = "*"
 
 [dev-packages]
 
