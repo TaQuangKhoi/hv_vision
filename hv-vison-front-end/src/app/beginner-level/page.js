@@ -1,7 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {data} from "autoprefixer";
 
 export default function BeginnerPage() {
     const [imageUploadSrc, setImageUploadSrc] = useState('/when-no-image.png');
@@ -17,8 +18,44 @@ export default function BeginnerPage() {
         });
     }
 
-    function canny() {
-        console.debug("Khôi yêu Hảo")
+    async function canny() {
+        let input = document.getElementById('imageInput');
+        let data = new FormData();
+        data.append('file', input.files[0]);
+
+        await fetch('http://127.0.0.1:8000/canny/create/?filename=test.png', {
+            method: 'POST',
+            headers: {
+                // 'Accept': 'application/json',
+                // 'Content-Type': '*/*',
+            },
+            body: data
+        }).then(response => {
+            console.debug(response)
+        }).catch(error => {
+            console.error(error)
+        })
+    }
+
+    function contours() {
+        console.debug("contours-Khôi yêu Hảo")
+    }
+
+    async function test() {
+        await fetch('http://127.0.0.1:8000/canny/test/', {
+            method: 'POST',
+            headers: {
+                // 'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "name": "Hảo"
+            })
+        }).then(response => {
+            console.debug(response)
+        }).catch(error => {
+            console.error(error)
+        })
     }
 
     return (
@@ -32,22 +69,22 @@ export default function BeginnerPage() {
                 <ul>
                     <li>
                         <button onClick={canny}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                            type="submit" id="canny-submit-button">
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                type="submit" id="canny-submit-button">
                             Canny
                         </button>
                     </li>
                     <li>
-                        <button
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                            type="submit" id="contours-submit-button">
+                        <button onClick={contours}
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                type="submit" id="contours-submit-button">
                             Contours
                         </button>
                     </li>
                 </ul>
                 <div className="object-contain h-[500px] w-[500px] m-auto rounded-[10px] border-[#0a53be] border-2">
                     <Image className={'h-[498px] w-[498px] !object-contain'}
-                        src={imagePreviewSrc} id="image-preview" alt="Ảnh Hảo Preview" width={498} height={498}/>
+                           src={imagePreviewSrc} id="image-preview" alt="Ảnh Hảo Preview" width={498} height={498}/>
                 </div>
             </div>
             <form action="" method="post" encType="multipart/form-data" id="form-file">
