@@ -27,6 +27,12 @@ export default function BeginnerPage() {
 
     async function canny() {
         let input = document.getElementById('imageInput');
+
+        if (!input.files[0]) {
+            toast("Please choose an image")
+            return
+        }
+
         let data = new FormData();
         data.append('file', input.files[0]);
 
@@ -49,6 +55,12 @@ export default function BeginnerPage() {
 
     async function contours() {
         let input = document.getElementById('imageInput');
+
+        if (!input.files[0]) {
+            toast("Please choose an image")
+            return
+        }
+
         let data = new FormData();
         data.append('file', input.files[0]);
 
