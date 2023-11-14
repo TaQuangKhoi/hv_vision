@@ -8,6 +8,8 @@ export default function BeginnerPage() {
     const [imageUploadSrc, setImageUploadSrc] = useState('/when-no-image.png');
     const [imagePreviewSrc, setImagePreviewSrc] = useState('/when-no-image.png');
 
+    let endpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
+
     function uploadImage() {
         const imageInput = document.getElementById('imageInput');
         imageInput.click();
@@ -23,7 +25,6 @@ export default function BeginnerPage() {
         let data = new FormData();
         data.append('file', input.files[0]);
 
-        let endpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
         await fetch(endpoint + '/canny/create/', {
             method: 'POST',
             body: data
@@ -38,12 +39,27 @@ export default function BeginnerPage() {
         })
     }
 
-    function contours() {
-        console.debug("contours-Khôi yêu Hảo")
+    async function contours() {
+        let input = document.getElementById('imageInput');
+        let data = new FormData();
+        data.append('file', input.files[0]);
+
+        await fetch(endpoint + '/contours/create/', {
+            method: 'POST',
+            body: data
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            let json = JSON.parse(data)
+            // setImageUploadSrc(json.imageUpload)
+            setImagePreviewSrc(json.imagePreview)
+        }).catch(error => {
+            console.error(error)
+        })
     }
 
     async function test() {
-        await fetch('http://127.0.0.1:8000/canny/test/', {
+        await fetch(endpoint + '/canny/test/', {
             method: 'POST',
             headers: {
                 // 'Accept': 'application/json',
