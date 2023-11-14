@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.views import View
 from rest_framework import viewsets, views
 from rest_framework.parsers import MultiPartParser
 from rest_framework.renderers import JSONRenderer
@@ -20,12 +18,11 @@ class FileUploadView(views.APIView):
     parser_classes = (MultiPartParser,)
 
     def post(self, request, format=None):
-        print(request.data)
-        # file_obj = request.FILES.get("file")
-        # [image_upload, image_preview] = utils.get_canny_image(file_obj)
+        file_obj = request.data.get('file')
+        [image_upload, image_preview] = utils.get_canny_image(file_obj)
         res = {
-            'imageUpload': 'image_upload',
-            'imagePreview': 'image_preview',
+            'imageUpload': image_upload,
+            'imagePreview': image_preview,
         }
         json_data = JSONRenderer().render(res)
         return Response(
