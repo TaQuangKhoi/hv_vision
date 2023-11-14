@@ -1,10 +1,9 @@
 from django.views.decorators import gzip
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse, HttpResponse
 import cv2
 import threading
 
 
-# Create your views here.
 class VideoCamera(object):
     def __init__(self):
         self.video = cv2.VideoCapture("rtmp://35.185.190.46/live/keios")
@@ -16,6 +15,10 @@ class VideoCamera(object):
 
     def get_frame(self):
         image = self.frame
+
+        # Processing image here
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
         _, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
 
@@ -37,4 +40,4 @@ def livefe(request):
         cam = VideoCamera()
         return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
-        pass
+        return HttpResponse("error")
