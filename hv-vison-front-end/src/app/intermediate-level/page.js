@@ -1,12 +1,12 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function BeginnerPage() {
+export default function IntermediatePage() {
     return (
         <main>
             <div className="flex justify-center items-center text-center text-2xl min-h-[100vh]">
-                <p>
-                    Coming soon...
-                </p>
+                <Link href={'intermediate-level/camera'}>
+                    Camera
+                </Link>
             </div>
         </main>
     )
