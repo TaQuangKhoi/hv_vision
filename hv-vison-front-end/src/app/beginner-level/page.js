@@ -1,14 +1,17 @@
 'use client';
 
 import Image from "next/image";
-import { useState} from "react";
-import { toast } from 'react-toastify';
+import {useState} from "react";
+import {toast} from 'react-toastify';
+import { useRouter } from 'next/navigation'
 
 export default function BeginnerPage() {
     const [imageUploadSrc, setImageUploadSrc] = useState('/when-no-image.png');
     const [imagePreviewSrc, setImagePreviewSrc] = useState('/when-no-image.png');
     const [cannyLoading, setCannyLoading] = useState(false);
     const [contoursLoading, setContoursLoading] = useState(false);
+
+    const router = useRouter()
 
     let endpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
 
@@ -84,10 +87,16 @@ export default function BeginnerPage() {
 
     return (
         <main>
-            <button title="Contact Sale"
-                    className="fixed z-90 top-10 left-8 bg-blue-600 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl hover:animate-bounce duration-300">&#9993;</button>
-            <div className="flex sm:flex-col md:flex-col lg:flex-row  justify-center items-center text-center min-h-[100vh]">
-                <div className="h-[500px] w-[500px] m-auto rounded-[10px] border-[#0a53be] border-2 hover:cursor-pointer" onClick={uploadImage}>
+            <button title="Back" onClick={() => {router.back()}}
+                    className="fixed z-90 top-10 left-8 w-20 h-20 rounded-full flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl hover:animate-bounce duration-300"
+            >
+                <img src="https://cdn-icons-png.flaticon.com/512/7915/7915208.png"/>
+            </button>
+            <div
+                className="flex sm:flex-col md:flex-col lg:flex-row  justify-center items-center text-center min-h-[100vh]">
+                <div
+                    className="h-[500px] w-[500px] m-auto rounded-[10px] border-[#0a53be] border-2 hover:cursor-pointer"
+                    onClick={uploadImage}>
                     <Image width={498} height={498} className={'h-[498px] w-[498px] !object-contain rounded-[10px]'}
                            src={imageUploadSrc} id="image-upload" alt="Ảnh Hảo Upload"/>
                 </div>
