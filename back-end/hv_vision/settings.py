@@ -197,3 +197,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://hv-vision-front-end.vercel.app',
 ]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w[a-zA-Z0-9_.+-]+\.vercel\.app",
+]
