@@ -9,7 +9,7 @@ router.register('history', views.HistoryViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
 
-    re_path('create_canny/', views.FileUploadView.as_view(), name='create_canny'),
+    path('create/', views.FileUploadView.as_view(), name='create_canny'),
 
     path('test/', views.CannyView.as_view(), name='test'),
 ]
