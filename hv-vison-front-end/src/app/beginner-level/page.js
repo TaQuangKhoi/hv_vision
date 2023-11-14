@@ -1,8 +1,8 @@
 'use client';
 
 import Image from "next/image";
-import {useEffect, useState} from "react";
-import {data} from "autoprefixer";
+import { useState} from "react";
+import { toast } from 'react-toastify';
 
 export default function BeginnerPage() {
     const [imageUploadSrc, setImageUploadSrc] = useState('/when-no-image.png');
@@ -39,7 +39,8 @@ export default function BeginnerPage() {
             setImagePreviewSrc(json.imagePreview)
             setCannyLoading(false)
         }).catch(error => {
-            console.error(error)
+            toast("Can't send image to server")
+            setCannyLoading(false)
         })
     }
 
@@ -56,11 +57,11 @@ export default function BeginnerPage() {
             return response.json()
         }).then(data => {
             let json = JSON.parse(data)
-            // setImageUploadSrc(json.imageUpload)
             setImagePreviewSrc(json.imagePreview)
             setContoursLoading(false)
         }).catch(error => {
-            console.error(error)
+            toast("Can't send image to server")
+            setContoursLoading(false)
         })
     }
 
@@ -83,10 +84,10 @@ export default function BeginnerPage() {
 
     return (
         <main>
-            <div className="center-middle-screen flex justify-center items-center text-center min-h-[100vh]">
+            <div className="flex justify-center items-center text-center min-h-[100vh]">
                 <div onClick={uploadImage}
                      className="h-[500px] w-[500px] m-auto rounded-[10px] border-[#0a53be] border-2 hover:cursor-pointer">
-                    <Image width={498} height={498} className={'h-[498px] w-[498px] !object-contain'}
+                    <Image width={498} height={498} className={'h-[498px] w-[498px] !object-contain rounded-[10px]'}
                            src={imageUploadSrc} id="image-upload" alt="Ảnh Hảo Upload"/>
                 </div>
                 <ul>
@@ -103,7 +104,6 @@ export default function BeginnerPage() {
                                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
                                 : ''}
-
                             Canny
                         </button>
                     </li>
@@ -125,7 +125,7 @@ export default function BeginnerPage() {
                     </li>
                 </ul>
                 <div className="object-contain h-[500px] w-[500px] m-auto rounded-[10px] border-[#0a53be] border-2">
-                    <Image className={'h-[498px] w-[498px] !object-contain'}
+                    <Image className={'h-[498px] w-[498px] !object-contain rounded-[10px]'}
                            src={imagePreviewSrc} id="image-preview" alt="Ảnh Hảo Preview" width={498} height={498}/>
                 </div>
             </div>
