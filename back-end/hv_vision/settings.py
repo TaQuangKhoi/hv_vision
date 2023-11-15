@@ -102,6 +102,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hv_vision.wsgi.application'
+ASGI_APPLICATION = 'hv_vision.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
