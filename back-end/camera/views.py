@@ -1,5 +1,5 @@
 from django.views.decorators import gzip
-from django.http import StreamingHttpResponse, HttpResponse
+from django.http import StreamingHttpResponse, HttpResponse, JsonResponse, FileResponse
 import cv2
 import threading
 
@@ -33,9 +33,26 @@ def gen(camera):
 
 
 @gzip.gzip_page
-def livefe(request):
+def gray(request):
     try:
         cam = VideoCamera("rtmp://35.185.190.46/live/keios")
         return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
-        return HttpResponse("error")
+        return JsonResponse({"error": "error"})
+
+
+def get_image(request):
+    print("get_image")
+
+    cam = VideoCamera("rtmp://35.185.190.46/live/keios")
+    frame = cam.get_frame()
+    print("frame")
+
+    image = yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    print("yield")
+
+    img = open(image, 'rb')
+    print("open")
+
+    return FileResponse(img)
