@@ -18,18 +18,18 @@ export default function CameraPage() {
 
     useEffect(() => {
         if (!isStop) {
-            setInterval(() => {
-                fetch(apiEndpoint + '/camera/video/', {}).then(response => {
-                    let status = response.status
-                    if (status === 200) {
-                        if (imageSrc === '/when-no-image.png') {
-                            setImageSrc(apiEndpoint + '/camera/video/')
-                        }
-                    }
-                }).catch(error => {
-                    setImageSrc('/when-no-image.png')
-                })
-            }, 2000)
+            // setInterval(() => {
+            //     fetch(apiEndpoint + '/camera/video/', {}).then(response => {
+            //         let status = response.status
+            //         if (status === 200) {
+            //             if (imageSrc === '/when-no-image.png') {
+            //                 setImageSrc(apiEndpoint + '/camera/video/')
+            //             }
+            //         }
+            //     }).catch(error => {
+            //         setImageSrc('/when-no-image.png')
+            //     })
+            // }, 2000)
         }
     }, []);
 
