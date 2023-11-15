@@ -14,22 +14,39 @@ export default function CameraPage() {
 
     const [imageSrc, setImageSrc] = useState('/when-no-image.png')
 
+    const [isStop, setIsStop] = useState(false)
+
     useEffect(() => {
-        setInterval(() => {
-            fetch(apiEndpoint + '/camera/video/', {}).then(response => {
-                let status = response.status
-                if (status === 200) {
-                    if (imageSrc === '/when-no-image.png') {
-                        setImageSrc(apiEndpoint + '/camera/video/')
+        if (!isStop) {
+            setInterval(() => {
+                fetch(apiEndpoint + '/camera/video/', {}).then(response => {
+                    let status = response.status
+                    if (status === 200) {
+                        if (imageSrc === '/when-no-image.png') {
+                            setImageSrc(apiEndpoint + '/camera/video/')
+                        }
                     }
-                }
-            }).catch(error => {
-                setImageSrc('/when-no-image.png')
-            })
-        }, 2000)
+                }).catch(error => {
+                    setImageSrc('/when-no-image.png')
+                })
+            }, 2000)
+        }
     }, []);
 
     return <>
+        <button onClick={
+            () => {
+                if (isStop) {
+                    setIsStop(false)
+                } else {
+                    setIsStop(true)
+                }
+            }}
+                className="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="button" id="canny-submit-button">
+            Stop
+        </button>
+
         <button onClick={() => setImageSrc(apiEndpoint + '/camera/video/')}
                 className="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 type="button" id="canny-submit-button">
