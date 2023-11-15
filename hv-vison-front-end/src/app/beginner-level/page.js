@@ -4,6 +4,7 @@ import Image from "next/image";
 import {useState} from "react";
 import {toast} from 'react-toastify';
 import { useRouter } from 'next/navigation'
+import Link from "next/link";
 
 export default function BeginnerPage() {
     const [imageUploadSrc, setImageUploadSrc] = useState('/when-no-image.png');
@@ -99,11 +100,11 @@ export default function BeginnerPage() {
 
     return (
         <main>
-            <button title="Back" onClick={() => {router.back()}}
+            <Link href={'/'}
                     className="fixed z-90 top-10 left-8 w-20 h-20 rounded-full flex justify-center items-center text-white text-4xl hover:bg-blue-700 hover:drop-shadow-2xl hover:animate-bounce duration-300"
             >
                 <img src="https://cdn-icons-png.flaticon.com/512/7915/7915208.png"/>
-            </button>
+            </Link>
             <div
                 className="flex sm:flex-col md:flex-col lg:flex-row  justify-center items-center text-center min-h-[100vh]">
                 <div
