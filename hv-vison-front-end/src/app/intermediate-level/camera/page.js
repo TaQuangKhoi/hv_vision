@@ -1,10 +1,7 @@
 'use client';
 
 import {useEffect, useState} from "react";
-import Image from "next/image";
-import Link from "next/link";
 import {toast} from "react-toastify";
-import axios from "axios";
 
 function CvImage({src}) {
     return <img src={src}
@@ -15,8 +12,22 @@ function CvImage({src}) {
 export default function CameraPage() {
     let apiEndpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
 
-    const [imageSrc, setImageSrc] = useState(apiEndpoint + '/camera/video/')
+    const [imageSrc, setImageSrc] = useState('/when-no-image.png')
 
+    useEffect(() => {
+        setInterval(() => {
+            fetch(apiEndpoint + '/camera/video/', {}).then(response => {
+                let status = response.status
+                if (status === 200) {
+                    if (imageSrc === '/when-no-image.png') {
+                        setImageSrc(apiEndpoint + '/camera/video/')
+                    }
+                }
+            }).catch(error => {
+                setImageSrc('/when-no-image.png')
+            })
+        }, 2000)
+    }, []);
 
     return <>
         <button onClick={() => setImageSrc(apiEndpoint + '/camera/video/')}
