@@ -14,10 +14,8 @@ class VideoCamera(object):
         self.video.release()
 
     def get_frame(self):
-        image = self.frame
-
         # Processing image here
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
 
         _, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
