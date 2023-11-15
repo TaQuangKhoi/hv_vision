@@ -23,12 +23,13 @@ class VideoCamera(object):
         return jpeg.tobytes()
 
     def get_face_detect_frame(self):
+        print("get_face_detect_frame")
         haarcascade_frontalface_default_xml = impresources.files(models) / 'haarcascade_frontalface_default.xml'
         haarcascade_eye_xml = impresources.files(models) / 'haarcascade_eye.xml'
         with haarcascade_frontalface_default_xml.open("rt") as f:
-            face_cascade = cv2.CascadeClassifier(f.read())
+            face_cascade = cv2.CascadeClassifier(f.name)
         with haarcascade_eye_xml.open("rt") as f:
-            eye_cascade = cv2.CascadeClassifier(f.read())
+            eye_cascade = cv2.CascadeClassifier(f.name)
 
         img = self.frame
 
@@ -36,6 +37,7 @@ class VideoCamera(object):
 
         # Detects faces of different sizes in the input image
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        print(len(faces))
 
         for (x, y, w, h) in faces:
             # To draw a rectangle in a face

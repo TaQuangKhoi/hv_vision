@@ -45,6 +45,7 @@ def video(request):
 def face_detect(request):
     """ Normal Video """
     try:
+        print("view face_detect")
         cam = VideoCamera(rtmp_url)
         return StreamingHttpResponse(generate_video(cam.get_face_detect_frame()),
                                      content_type="multipart/x-mixed-replace;boundary=frame")
