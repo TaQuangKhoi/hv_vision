@@ -5,8 +5,8 @@ import threading
 
 
 class VideoCamera(object):
-    def __init__(self):
-        self.video = cv2.VideoCapture("rtmp://35.185.190.46/live/keios")
+    def __init__(self, source):
+        self.video = cv2.VideoCapture(source)
         (self.grabbed, self.frame) = self.video.read()
         threading.Thread(target=self.update, args=()).start()
 
@@ -35,7 +35,7 @@ def gen(camera):
 @gzip.gzip_page
 def livefe(request):
     try:
-        cam = VideoCamera()
+        cam = VideoCamera("rtmp://35.185.190.46/live/keios")
         return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
         return HttpResponse("error")
