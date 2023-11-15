@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
+import apiEndpoint from "@/django_api_endpoint";
 
 function CvImage({src}) {
     return <img src={src}
@@ -10,8 +11,6 @@ function CvImage({src}) {
 }
 
 export default function CameraPage() {
-    let apiEndpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
-
     const [imageSrc, setImageSrc] = useState('/when-no-image.png')
 
     const [isStop, setIsStop] = useState(false)
@@ -36,6 +35,7 @@ export default function CameraPage() {
     return <>
         <button onClick={
             () => {
+                setImageSrc('/when-no-image.png')
                 if (isStop) {
                     setIsStop(false)
                 } else {

@@ -5,6 +5,7 @@ import {useState} from "react";
 import {toast} from 'react-toastify';
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
+import apiEndpoint from "@/django_api_endpoint";
 
 export default function BeginnerPage() {
     const [imageUploadSrc, setImageUploadSrc] = useState('/when-no-image.png');
@@ -13,8 +14,6 @@ export default function BeginnerPage() {
     const [contoursLoading, setContoursLoading] = useState(false);
 
     const router = useRouter()
-
-    let endpoint = process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN ? process.env.NEXT_PUBLIC_DJANGO_API_DOMAIN : 'http://127.0.0.1:8000'
 
     function uploadImage() {
         const imageInput = document.getElementById('imageInput');
@@ -38,7 +37,7 @@ export default function BeginnerPage() {
         data.append('file', input.files[0]);
 
         setCannyLoading(true)
-        await fetch(endpoint + '/canny/create/', {
+        await fetch(apiEndpoint + '/canny/create/', {
             method: 'POST',
             body: data
         }).then(response => {
@@ -66,7 +65,7 @@ export default function BeginnerPage() {
         data.append('file', input.files[0]);
 
         setContoursLoading(true)
-        await fetch(endpoint + '/contours/create/', {
+        await fetch(apiEndpoint + '/contours/create/', {
             method: 'POST',
             body: data
         }).then(response => {
@@ -82,7 +81,7 @@ export default function BeginnerPage() {
     }
 
     async function test() {
-        await fetch(endpoint + '/canny/test/', {
+        await fetch(apiEndpoint + '/canny/test/', {
             method: 'POST',
             headers: {
                 // 'Accept': 'application/json',
