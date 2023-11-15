@@ -22,8 +22,8 @@ class VideoCamera(object):
         return jpeg.tobytes()
 
     def get_face_detect_frame(self):
-        face_cascade = cv2.CascadeClassifier('models/haarcascade_frontalface_default.xml')
-        eye_cascade = cv2.CascadeClassifier('models/haarcascade_eye.xml')
+        face_cascade = cv2.CascadeClassifier('https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml')
+        eye_cascade = cv2.CascadeClassifier('https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye.xml')
 
         img = self.frame
 
