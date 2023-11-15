@@ -1,6 +1,7 @@
 import threading
-
 import cv2
+from importlib import resources as impresources
+from . import models
 
 
 class VideoCamera(object):
@@ -22,8 +23,12 @@ class VideoCamera(object):
         return jpeg.tobytes()
 
     def get_face_detect_frame(self):
-        face_cascade = cv2.CascadeClassifier('https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml')
-        eye_cascade = cv2.CascadeClassifier('https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye.xml')
+        haarcascade_frontalface_default_xml = impresources.files(models) / 'haarcascade_frontalface_default.xml'
+        haarcascade_eye_xml = impresources.files(models) / 'haarcascade_eye.xml'
+        with haarcascade_frontalface_default_xml.open("rt") as f:
+            face_cascade = cv2.CascadeClassifier(f.read())
+        with haarcascade_eye_xml.open("rt") as f:
+            eye_cascade = cv2.CascadeClassifier(f.read())
 
         img = self.frame
 
