@@ -4,6 +4,8 @@ from django.http import StreamingHttpResponse, HttpResponse, JsonResponse, FileR
 from computer_vision.video_camera import VideoCamera
 
 
+rtmp_url = "rtmp://35.185.190.46/live/keios"
+
 def gen(camera):
     while True:
         frame = camera.get_frame()
@@ -21,7 +23,7 @@ def generate_video(frame):
 def gray(request):
     """ Gray Video """
     try:
-        cam = VideoCamera("rtmp://35.185.190.46/live/keios")
+        cam = VideoCamera(rtmp_url)
         return StreamingHttpResponse(generate_video(cam.get_gray_frame()),
                                      content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
@@ -32,25 +34,19 @@ def gray(request):
 def video(request):
     """ Normal Video """
     try:
-        cam = VideoCamera("rtmp://35.185.190.46/live/keios")
+        cam = VideoCamera(rtmp_url)
         return StreamingHttpResponse(generate_video(cam.get_frame()),
                                      content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
         return JsonResponse({"error": "error"})
 
 
-def get_image(request):
-    print("get_image")
-
-    cam = VideoCamera("rtmp://35.185.190.46/live/keios")
-    frame = cam.get_frame()
-    print("frame")
-
-    image = yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-    print("yield")
-
-    img = open(image, 'rb')
-    print("open")
-
-    return FileResponse(img)
+@gzip.gzip_page
+def face_detect(request):
+    """ Normal Video """
+    try:
+        cam = VideoCamera(rtmp_url)
+        return StreamingHttpResponse(generate_video(cam.get_face_detect_frame()),
+                                     content_type="multipart/x-mixed-replace;boundary=frame")
+    except:  # This is bad! replace it with proper handling
+        return JsonResponse({"error": "error"})
