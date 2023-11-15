@@ -14,9 +14,11 @@ class VideoCamera(object):
         self.video.release()
 
     def get_frame(self):
-        # Processing image here
-        image = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
+        _, jpeg = cv2.imencode('.jpg', self.frame)
+        return jpeg.tobytes()
 
+    def get_gray_frame(self):
+        image = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
         _, jpeg = cv2.imencode('.jpg', image)
         return jpeg.tobytes()
 
@@ -32,11 +34,30 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
+def generate_video(frame):
+    while True:
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
 @gzip.gzip_page
 def gray(request):
+    """ Gray Video """
     try:
         cam = VideoCamera("rtmp://35.185.190.46/live/keios")
-        return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+        return StreamingHttpResponse(generate_video(cam.get_gray_frame()),
+                                     content_type="multipart/x-mixed-replace;boundary=frame")
+    except:  # This is bad! replace it with proper handling
+        return JsonResponse({"error": "error"})
+
+
+@gzip.gzip_page
+def video(request):
+    """ Normal Video """
+    try:
+        cam = VideoCamera("rtmp://35.185.190.46/live/keios")
+        return StreamingHttpResponse(generate_video(cam.get_frame()),
+                                     content_type="multipart/x-mixed-replace;boundary=frame")
     except:  # This is bad! replace it with proper handling
         return JsonResponse({"error": "error"})
 
