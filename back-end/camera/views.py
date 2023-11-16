@@ -3,8 +3,8 @@ from django.http import StreamingHttpResponse, HttpResponse, JsonResponse, FileR
 
 from computer_vision.video_camera import VideoCamera
 
-
 rtmp_url = "rtmp://35.185.190.46/live/keios"
+
 
 def gen(camera):
     while True:
@@ -17,6 +17,13 @@ def generate_video(frame):
     while True:
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+def update_url(request):
+    global rtmp_url
+    rtmp_url = request.POST.get("rtmp_url")
+    print(rtmp_url)
+    return HttpResponse("OK")
 
 
 @gzip.gzip_page

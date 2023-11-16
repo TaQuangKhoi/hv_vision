@@ -202,9 +202,11 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https://\w[a-zA-Z0-9_.+-]+\.vercel\.app",
+    # localhost:3000
+    r"^http://localhost:3000",
 ]
 
-if os.environ.get('SERVER_GATEWAY_INTERFACE') == 'Web':
-    print('Web')
-else:
-    print('Asynchronous')
+# if os.environ.get('SERVER_GATEWAY_INTERFACE') == 'Web':
+#     print('Web')
+# else:
+#     print('Asynchronous')
