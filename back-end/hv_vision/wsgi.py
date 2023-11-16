@@ -16,7 +16,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hv_vision.settings')
 os.environ.setdefault('SERVER_GATEWAY_INTERFACE', 'Web')
 
 # create a Socket.IO server
-sio = socketio.Server()
 
 application = get_wsgi_application()
+sio = socketio.Server()
 application = socketio.WSGIApp(sio, application)
