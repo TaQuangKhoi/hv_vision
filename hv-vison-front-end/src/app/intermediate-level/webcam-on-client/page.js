@@ -11,7 +11,7 @@ function NoCam() {
 }
 
 export default function IntermediatePage() {
-    const [isStopCam, setIsStopCam] = useState(false)
+    const [isStopCam, setIsStopCam] = useState(true)
 
     return <main>
         <button onClick={
