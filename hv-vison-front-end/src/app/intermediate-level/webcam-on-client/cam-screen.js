@@ -40,8 +40,9 @@ const CamScreen = () => {
     }, [mediaStream]);
 
     return (
-        <div>
-            <video ref={videoRef} autoPlay={true}/>
+        <div className="w-[720px] h-[540px] m-auto rounded-[10px] border-[#0a53be] border-2">
+            <video className="w-[960px] h-[540px] !object-contain rounded-[10px]"
+                   ref={videoRef} autoPlay={true}/>
         </div>
     )
 
