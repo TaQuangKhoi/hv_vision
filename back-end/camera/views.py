@@ -4,8 +4,16 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 from computer_vision.video_camera import VideoCamera
+import socketio
+
+sio = socketio.Server(async_mode='threading')
 
 rtmp_url = "rtmp://35.185.190.46/live/keios"
+
+
+@sio.on('connect')
+def my_event(sid):
+    print("connected")
 
 
 def gen(camera):
