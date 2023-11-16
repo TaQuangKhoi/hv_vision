@@ -2,7 +2,8 @@
 
 import CamScreen from "@/app/intermediate-level/webcam-on-client/cam-screen";
 import apiEndpoint from "@/django_api_endpoint";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import io from "socket.io-client";
 
 function NoCam() {
     return <div className="w-[720px] h-[540px] m-auto rounded-[10px] border-[#0a53be] border-2">
@@ -12,6 +13,19 @@ function NoCam() {
 
 export default function IntermediatePage() {
     const [isStopCam, setIsStopCam] = useState(true)
+    // const socket = io.connect(apiEndpoint);
+
+    // useEffect(() => {
+        // socket.on('new', () => {
+        //     console.log('connected')
+        // })
+        // socket.on('disconnect', () => {
+        //     console.log('disconnected')
+        // })
+        // socket.on('message', (data) => {
+        //     console.log(data)
+        // })
+    // }, [])
 
     return <main>
         <button onClick={
