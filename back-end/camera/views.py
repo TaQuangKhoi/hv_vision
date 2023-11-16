@@ -1,5 +1,7 @@
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse, HttpResponse, JsonResponse, FileResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 from computer_vision.video_camera import VideoCamera
 
@@ -19,11 +21,12 @@ def generate_video(frame):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
+@csrf_exempt
 def update_url(request):
-    global rtmp_url
-    rtmp_url = request.POST.get("rtmp_url")
-    print(rtmp_url)
-    return HttpResponse("OK")
+    if request.method == "POST":
+        global rtmp_url
+        rtmp_url = json.loads(request.body)["rtmp_url"]
+        return HttpResponse("OK")
 
 
 @gzip.gzip_page
