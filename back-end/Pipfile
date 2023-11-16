@@ -19,6 +19,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 pytesseract = "*"
 uvicorn = "*"
+python-socketio = "*"
 
 [dev-packages]
 
