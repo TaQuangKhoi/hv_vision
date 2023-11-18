@@ -13,6 +13,16 @@ pillow = "*"
 whitenoise = "*"
 opencv-python = "*"
 matplotlib = "*"
+psycopg2 = "*"
+dj-database-url = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+pytesseract = "*"
+uvicorn = "*"
+python-socketio = "*"
+python-engineio = "*"
+gevent = "*"
+eventlet = "*"
 
 [dev-packages]
 
