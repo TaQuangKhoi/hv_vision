@@ -2,7 +2,8 @@
   "git": {
     "deploymentEnabled": {
       "back-end": false,
-      "front-end": true
+      "front-end": true,
+      "main": true
     }
   }
 }
